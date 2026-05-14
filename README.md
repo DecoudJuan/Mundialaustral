@@ -1,7 +1,12 @@
+# Mundialaustral
+
+Repositorio donde se sube el desarrollo de la competencia **Mundial Austral**, organizada por el departamento de Inteligencia Artificial de la Facultad de Ingeniería, **Universidad Austral**.
+
+---
+
 # Mundial 2026 — Recomendador de Partidos
 
 Motor de recomendación inteligente para el Mundial 2026 (48 selecciones, 104 partidos).
-Hecho para la competencia de la Facultad de Ingeniería, **Universidad Austral**.
 
 ## Idea
 
