@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundial 2026 · Tu recomendador de partidos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bar">
+      <div class="logo">
+        <span class="ball">⚽</span>
+        <span class="brand">Mundial<strong>26</strong></span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="recos">Recomendaciones</button>
+        <button class="nav-btn" data-view="fixture">Fixture</button>
+        <button class="nav-btn" data-view="profile">Mi perfil</button>
+      </nav>
+    </div>
+    <div class="hero-content">
+      <h1>104 partidos. <span class="accent">Solo querés ver los que importan.</span></h1>
+      <p>Te decimos cuáles son <em>imperdibles</em>, cuáles <em>valen la pena</em> y cuáles podés ver en resumen — según vos.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Onboarding -->
+    <section id="view-onboarding" class="view active">
+      <div class="container">
+        <h2>Armemos tu perfil</h2>
+        <p class="subtitle">Como Spotify, pero para partidos del Mundial.</p>
+
+        <div class="step">
+          <h3>1. ¿Qué selecciones te interesan?</h3>
+          <p class="hint">Elegí hasta 5. Los partidos donde juegan tendrán prioridad máxima.</p>
+          <div id="team-picker" class="team-grid"></div>
+        </div>
+
+        <div class="step">
+          <h3>2. ¿Qué estilos de juego disfrutás?</h3>
+          <div class="chip-row" id="style-picker">
+            <label class="chip"><input type="checkbox" value="ofensivo"><span>⚡ Ofensivo</span></label>
+            <label class="chip"><input type="checkbox" value="técnico"><span>🎨 Técnico</span></label>
+            <label class="chip"><input type="checkbox" value="físico"><span>💪 Físico</span></label>
+            <label class="chip"><input type="checkbox" value="defensivo"><span>🛡️ Defensivo</span></label>
+            <label class="chip"><input type="checkbox" value="intenso"><span>🔥 Intenso</span></label>
+          </div>
+        </div>
+
+        <div class="step">
+          <h3>3. ¿Algún jugador favorito?</h3>
+          <p class="hint">Separá por coma. Ej: Messi, Mbappé, Yamal</p>
+          <input id="players-input" type="text" placeholder="Messi, Mbappé...">
+        </div>
+
+        <div class="step">
+          <h3>4. ¿Cuándo podés mirar? (hora Argentina)</h3>
+          <div class="chip-row" id="time-picker">
+            <label class="chip"><input type="checkbox" value="mañana"><span>🌅 Mañana (6-12)</span></label>
+            <label class="chip"><input type="checkbox" value="tarde"><span>☀️ Tarde (12-18)</span></label>
+            <label class="chip"><input type="checkbox" value="noche" checked><span>🌙 Noche (18-24)</span></label>
+            <label class="chip"><input type="checkbox" value="trasnoche"><span>🌌 Trasnoche (0-6)</span></label>
+          </div>
+        </div>
+
+        <button id="btn-build" class="btn-primary">Armar mi Mundial →</button>
+      </div>
+    </section>
+
+    <!-- Recomendaciones -->
+    <section id="view-recos" class="view">
+      <div class="container">
+        <div class="bucket" data-bucket="imperdible">
+          <div class="bucket-head">
+            <div class="bucket-title">
+              <span class="badge imperdible">IMPERDIBLE</span>
+              <h2>No te los pierdas</h2>
+            </div>
+            <span class="bucket-count" id="count-imperdible">0 partidos</span>
+          </div>
+          <div class="match-row" id="list-imperdible"></div>
+        </div>
+
+        <div class="bucket" data-bucket="vale">
+          <div class="bucket-head">
+            <div class="bucket-title">
+              <span class="badge vale">VALE LA PENA</span>
+              <h2>Si tenés tiempo</h2>
+            </div>
+            <span class="bucket-count" id="count-vale">0 partidos</span>
+          </div>
+          <div class="match-row" id="list-vale"></div>
+        </div>
+
+        <div class="bucket" data-bucket="resumen">
+          <div class="bucket-head">
+            <div class="bucket-title">
+              <span class="badge resumen">RESUMEN</span>
+              <h2>Mirá los goles después</h2>
+            </div>
+            <span class="bucket-count" id="count-resumen">0 partidos</span>
+          </div>
+          <div class="match-row" id="list-resumen"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fixture -->
+    <section id="view-fixture" class="view">
+      <div class="container">
+        <div class="fixture-filters">
+          <select id="filter-stage">
+            <option value="">Toda la fase</option>
+            <option>Grupos</option>
+            <option>R32</option>
+            <option>Octavos</option>
+            <option>Cuartos</option>
+            <option>Semis</option>
+            <option>3er Puesto</option>
+            <option>Final</option>
+          </select>
+          <select id="filter-team">
+            <option value="">Todas las selecciones</option>
+          </select>
+        </div>
+        <div id="fixture-list"></div>
+      </div>
+    </section>
+
+    <!-- Perfil -->
+    <section id="view-profile" class="view">
+      <div class="container">
+        <h2>Mi perfil</h2>
+        <div id="profile-summary" class="profile-card"></div>
+        <button id="btn-reset" class="btn-secondary">Rearmar perfil</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal detalle partido -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card" id="modal-content"></div>
+  </div>
+
+  <footer class="footer">
+    Hecho para la competencia FI · Universidad Austral · Mundial 2026
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="fixture.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
